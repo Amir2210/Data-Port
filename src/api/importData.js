@@ -3,7 +3,7 @@ export const importData = {
 }
 
 async function fetchData() {
-  const url = 'https://data.gov.il/api/3/action/datastore_search?resource_id=80c1e38e-06b9-4a67-b2a4-cc1a76374ee9&limit=5'
+  const url = 'https://data.gov.il/api/3/action/datastore_search?resource_id=80c1e38e-06b9-4a67-b2a4-cc1a76374ee9&'
   try {
     const res = await fetch(url)
     if (!res.ok) {

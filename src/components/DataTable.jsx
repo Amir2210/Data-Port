@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { importData } from '../api/importData'
-import { useEffect } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { Box, Typography } from '@mui/material';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { useEffect } from 'react'
+import { DataGrid } from '@mui/x-data-grid'
+import { Box, Typography } from '@mui/material'
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 export function DataTable() {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([])
   const [selectedCountry, setSelectedCountry] = useState("All")
+  const [selectedCustomHouse, setSelectedCustomHouse] = useState("All")
   const [error, setError] = useState("")
   const [year, setYear] = useState(2025)
 
@@ -25,8 +26,8 @@ export function DataTable() {
   }, [year])
 
   const uniqueCountries = Array.from(new Set(data.map((row) => row.Origin_Country))).filter(Boolean)
+  const uniqueCustomsHouse = Array.from(new Set(data.map((row) => row.CustomsHouse))).filter(Boolean)
 
-  // כשמשתמש בוחר מדינה
   const handleCountryChange = (event) => {
     const country = event.target.value
     setSelectedCountry(country)
@@ -34,6 +35,15 @@ export function DataTable() {
       setFilteredData(data)
     } else {
       setFilteredData(data.filter((row) => row.Origin_Country === country))
+    }
+  }
+  const handleCustomsHouseChange = (event) => {
+    const customHouse = event.target.value
+    console.log('customHouse:', customHouse)
+    if (customHouse === "All") {
+      setFilteredData(data)
+    } else {
+      setFilteredData(data.filter((row) => row.CustomsHouse === customHouse))
     }
   }
 
@@ -63,7 +73,7 @@ export function DataTable() {
     { field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 150 },
     { field: 'PurchaseTax', headerName: 'מס קניה', width: 120 },
     { field: 'VAT', headerName: 'מע״מ', width: 100 },
-  ];
+  ]
 
   return (
     <div>
@@ -97,6 +107,20 @@ export function DataTable() {
               <MenuItem value="All">כל המדינות</MenuItem>
               {uniqueCountries.map(country => (
                 <MenuItem key={country} value={country}>{country}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl sx={{ minWidth: 200, mb: 2 }}>
+            <InputLabel>בית מכס</InputLabel>
+            <Select
+              value={selectedCustomHouse}
+              label="בית מכס"
+              onChange={handleCustomsHouseChange}
+            >
+              <MenuItem value="All">כל בתי המכס</MenuItem>
+              {uniqueCustomsHouse.map(house => (
+                <MenuItem key={house} value={house}>{house}</MenuItem>
               ))}
             </Select>
           </FormControl>

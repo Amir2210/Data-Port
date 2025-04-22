@@ -21,6 +21,7 @@ export function DataTable() {
   }, [year])
 
   const columns = [
+    { field: '_id', headerName: 'ID', width: 70 },
     { field: 'Year', headerName: 'שנה', width: 90 },
     { field: 'Month', headerName: 'חודש', width: 90 },
     { field: 'Origin_Country', headerName: 'מדינת מקור', width: 150 },

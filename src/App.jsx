@@ -4,7 +4,7 @@ function App() {
 
   return (
     <main>
-      <h1>data port</h1>
+      <h1 className="text-3xl font-bold underline">data port</h1>
     </main>
   )
 }

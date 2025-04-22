@@ -17,14 +17,11 @@ export function DataTable() {
     getData()
   }, [])
 
-
-
   console.log('data:', data)
   return (
     <div>
       <h1>יבוא לישראל</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {error && <p className='text-red-400'>{error}</p>}
     </div>
   )
 }

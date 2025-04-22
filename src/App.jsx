@@ -1,10 +1,12 @@
+import { DataTable } from './components/DataTable'
 
 
 function App() {
 
   return (
-    <main>
-      <h1 className="text-3xl font-bold underline">data port</h1>
+    <main className='min-h-screen bg-stone-100'>
+      <h1 className="text-4xl text-stone-800 font-bold font-mono text-center pt-2">data port</h1>
+      <DataTable />
     </main>
   )
 }

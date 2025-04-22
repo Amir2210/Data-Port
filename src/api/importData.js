@@ -3,7 +3,6 @@ export const importData = {
 }
 
 async function fetchData(year) {
-  console.log('year:', year)
   switch (year) {
     case '2022':
       year = '72c85505-0453-4f3c-be5f-cf23c930f47b'

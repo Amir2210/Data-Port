@@ -9,6 +9,7 @@ export function DataTable() {
   const [filteredData, setFilteredData] = useState([])
   const [selectedCountry, setSelectedCountry] = useState("All")
   const [selectedCustomHouse, setSelectedCustomHouse] = useState("All")
+  const [selectedCurrencyCode, setSelectedCurrencyCode] = useState("All")
   const [error, setError] = useState("")
   const [year, setYear] = useState(2025)
 
@@ -27,6 +28,7 @@ export function DataTable() {
 
   const uniqueCountries = Array.from(new Set(data.map((row) => row.Origin_Country))).filter(Boolean)
   const uniqueCustomsHouse = Array.from(new Set(data.map((row) => row.CustomsHouse))).filter(Boolean)
+  const uniqueCurrencyCode = Array.from(new Set(data.map((row) => row.CurrencyCode))).filter(Boolean)
 
   const handleCountryChange = (event) => {
     const country = event.target.value
@@ -37,6 +39,7 @@ export function DataTable() {
       setFilteredData(data.filter((row) => row.Origin_Country === country))
     }
   }
+
   const handleCustomsHouseChange = (event) => {
     const customHouse = event.target.value
     setSelectedCustomHouse(customHouse)
@@ -44,6 +47,16 @@ export function DataTable() {
       setFilteredData(data)
     } else {
       setFilteredData(data.filter((row) => row.CustomsHouse === customHouse))
+    }
+  }
+
+  const handleCurrencyCodeChange = (event) => {
+    const currencyCode = event.target.value
+    setSelectedCurrencyCode(currencyCode)
+    if (currencyCode === "All") {
+      setFilteredData(data)
+    } else {
+      setFilteredData(data.filter((row) => row.CurrencyCode === currencyCode))
     }
   }
 
@@ -121,6 +134,20 @@ export function DataTable() {
               <MenuItem value="All">כל בתי המכס</MenuItem>
               {uniqueCustomsHouse.map(customHouse => (
                 <MenuItem key={customHouse} value={customHouse}>{customHouse}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl sx={{ minWidth: 200, mb: 2 }}>
+            <InputLabel>קוד מטבע</InputLabel>
+            <Select
+              value={selectedCurrencyCode}
+              label="קוד מטבע"
+              onChange={handleCurrencyCodeChange}
+            >
+              <MenuItem value="All">כל המטבעות</MenuItem>
+              {uniqueCurrencyCode.map(currencyCode => (
+                <MenuItem key={currencyCode} value={currencyCode}>{currencyCode}</MenuItem>
               ))}
             </Select>
           </FormControl>

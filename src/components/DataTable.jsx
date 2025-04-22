@@ -39,7 +39,7 @@ export function DataTable() {
   }
   const handleCustomsHouseChange = (event) => {
     const customHouse = event.target.value
-    console.log('customHouse:', customHouse)
+    setSelectedCustomHouse(customHouse)
     if (customHouse === "All") {
       setFilteredData(data)
     } else {
@@ -119,8 +119,8 @@ export function DataTable() {
               onChange={handleCustomsHouseChange}
             >
               <MenuItem value="All">כל בתי המכס</MenuItem>
-              {uniqueCustomsHouse.map(house => (
-                <MenuItem key={house} value={house}>{house}</MenuItem>
+              {uniqueCustomsHouse.map(customHouse => (
+                <MenuItem key={customHouse} value={customHouse}>{customHouse}</MenuItem>
               ))}
             </Select>
           </FormControl>

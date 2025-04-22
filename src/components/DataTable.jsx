@@ -3,8 +3,11 @@ import { importData } from '../api/importData'
 import { useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 export function DataTable() {
   const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+  const [selectedCountry, setSelectedCountry] = useState("All")
   const [error, setError] = useState("")
   const [year, setYear] = useState(2025)
 
@@ -13,12 +16,27 @@ export function DataTable() {
       try {
         const records = await importData.fetchData(year)
         setData(records)
+        setFilteredData(records)
       } catch (err) {
         setError(err.message || "Unknown error")
       }
     }
     getData()
   }, [year])
+
+  const uniqueCountries = Array.from(new Set(data.map((row) => row.Origin_Country))).filter(Boolean)
+
+  // כשמשתמש בוחר מדינה
+  const handleCountryChange = (event) => {
+    const country = event.target.value
+    setSelectedCountry(country)
+    if (country === "All") {
+      setFilteredData(data)
+    } else {
+      setFilteredData(data.filter((row) => row.Origin_Country === country))
+    }
+  }
+
 
   const columns = [
     { field: '_id', headerName: 'ID', width: 70 },
@@ -52,20 +70,43 @@ export function DataTable() {
       <h1 className='text-4xl text-stone-800 font-bold font-mono text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
       <Box sx={{ height: 600, width: '100%', p: 2 }}>
         <div className='flex gap-10'>
-          <select name='year' className="" onChange={(ev) => setYear(ev.target.value)}>
-            <option>2025</option>
-            <option>2024</option>
-            <option>2023</option>
-            <option>2022</option>
-          </select>
+
+          <FormControl sx={{ minWidth: 120, mb: 2 }}>
+            <InputLabel id="year-select-label">שנה</InputLabel>
+            <Select
+              labelId="year-select-label"
+              id="year-select"
+              value={year}
+              label="שנה"
+              onChange={(ev) => setYear(ev.target.value)}
+            >
+              <MenuItem value="2025">2025</MenuItem>
+              <MenuItem value="2024">2024</MenuItem>
+              <MenuItem value="2023">2023</MenuItem>
+              <MenuItem value="2022">2022</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl sx={{ minWidth: 200, mb: 2 }}>
+            <InputLabel>מדינה</InputLabel>
+            <Select
+              value={selectedCountry}
+              label="מדינה"
+              onChange={handleCountryChange}
+            >
+              <MenuItem value="All">כל המדינות</MenuItem>
+              {uniqueCountries.map(country => (
+                <MenuItem key={country} value={country}>{country}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
         </div>
         {error && <Typography color="error">{error}</Typography>}
         <DataGrid
-          rows={data}
+          rows={filteredData.map((row, index) => ({ id: index, ...row }))}
           columns={columns}
-          getRowId={(row) => row._id}
           pageSize={10}
-          rowsPerPageOptions={[10, 25, 50]}
         />
       </Box>
     </div>

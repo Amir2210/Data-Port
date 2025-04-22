@@ -11,14 +11,14 @@ export function DataTable() {
   useEffect(() => {
     async function getData() {
       try {
-        const records = await importData.fetchData()
+        const records = await importData.fetchData(year)
         setData(records)
       } catch (err) {
         setError(err.message || "Unknown error")
       }
     }
     getData()
-  }, [])
+  }, [year])
 
   const columns = [
     { field: 'Year', headerName: 'שנה', width: 90 },

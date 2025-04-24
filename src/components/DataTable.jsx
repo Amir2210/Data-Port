@@ -88,6 +88,15 @@ export function DataTable() {
     { field: 'VAT', headerName: 'מע״מ', width: 100 },
   ]
 
+  const yearlyImport = data.reduce((acc, row) => {
+    const year = row.Year
+    const amount = parseFloat(row.NISCurrencyAmount) || 0
+    acc[year] = (acc[year] || 0) + amount
+    return acc
+  }, {})
+
+  console.log('yearlyImport:', yearlyImport)
+
   return (
     <div>
       <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
@@ -154,6 +163,7 @@ export function DataTable() {
 
         </div>
         {error && <Typography color="error">{error}</Typography>}
+        {!data.length && <Typography color="error">Loading...</Typography>}
         <DataGrid
           rows={filteredData.map((row, index) => ({ id: index, ...row }))}
           columns={columns}

@@ -34,7 +34,7 @@ export function CustomsHouseChart({ data, year, totalYearlyImport }) {
           margin={{ top: 30, right: 30, left: 30, bottom: 80 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="location" angle={-45} textAnchor="end" interval={0} />
+          <XAxis dataKey="location" angle={0} textAnchor="middle" interval={0} />
           <YAxis scale="log" domain={['auto', 'auto']} tickFormatter={(val) => numeral(val).format('0.[0]a') + '₪'} />
           <Tooltip formatter={(val) => val.toLocaleString() + ' ₪'} />
           <Bar dataKey="total" fill="#2563eb" />

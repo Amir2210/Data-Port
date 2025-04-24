@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { Box, Typography } from '@mui/material'
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
-import { CustomsHouseChart } from './CustomsHouseChart'
+import { HeroCarousel } from './HeroCarousel'
 export function DataTable() {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([])
@@ -95,13 +95,13 @@ export function DataTable() {
   }, 0).toLocaleString();
 
 
-  // const sortedByAmount = [...data]
-  //   .filter(row => parseFloat(row.NISCurrencyAmount))
-  //   .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount));
+  const sortedByAmount = [...data]
+    .filter(row => parseFloat(row.NISCurrencyAmount))
+    .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount));
 
-  // const top5ExpensiveImports = sortedByAmount.slice(0, 5);
+  const top5ExpensiveImports = sortedByAmount.slice(0, 5);
 
-  // console.log('top5ExpensiveImports:', top5ExpensiveImports)
+  console.log('top5ExpensiveImports:', top5ExpensiveImports)
 
 
   return (
@@ -178,8 +178,9 @@ export function DataTable() {
             columns={columns}
             pageSize={10}
           />
-          <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
-          <CustomsHouseChart data={data} totalYearlyImport={totalYearlyImport} year={year} />
+          <div className='flex justify-center'>
+            <HeroCarousel data={data} columns={columns} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} />
+          </div>
         </Box>
 
       </div>

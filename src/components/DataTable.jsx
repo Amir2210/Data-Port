@@ -69,7 +69,7 @@ export function DataTable() {
     { field: 'CustomsItem_2_Digits', headerName: 'פריט מכס (2 ספרות)', width: 150 },
     { field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 150 },
     { field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 130 },
-    { field: 'CustomsHouse', headerName: 'בית מכס', width: 120 },
+    { field: 'CustomsHouse', headerName: 'בית מכס', width: 150 },
     { field: 'Quantity', headerName: 'כמות', width: 120 },
     { field: 'Quantity_MeasurementUnitID', headerName: 'קוד יחידת מידה', width: 140 },
     { field: 'Quantity_MeasurementUnitName', headerName: 'שם יחידת מידה', width: 150 },
@@ -81,7 +81,7 @@ export function DataTable() {
     { field: 'AutonomyTypeID', headerName: 'קוד אוטונומיה', width: 130 },
     { field: 'AutonomyType', headerName: 'סוג אוטונומיה', width: 150 },
     { field: 'GovernmentProcedureTypeName', headerName: 'תהליך ממשלתי (עברית)', width: 180 },
-    { field: 'GovernmentProcedureTypeEnglishName', headerName: 'תהליך ממשלתי (אנגלית)', width: 200 },
+    { field: 'GovernmentProcedureTypeEnglishName', headerName: 'תהליך ממשלתי (אנגלית)', width: 300 },
     { field: 'IsPreferenceDocument', headerName: 'יש מסמך העדפה', width: 160 },
     { field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 150 },
     { field: 'PurchaseTax', headerName: 'מס קניה', width: 120 },
@@ -90,9 +90,9 @@ export function DataTable() {
 
   return (
     <div>
-      <h1 className='text-4xl text-stone-800 font-bold font-mono text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
+      <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
       <Box sx={{ height: 600, width: '100%', p: 2 }}>
-        <div className='flex gap-10'>
+        <div className='flex flex-wrap gap-2 sm:gap-10'>
 
           <FormControl sx={{ minWidth: 120, mb: 2 }}>
             <InputLabel id="year-select-label">שנה</InputLabel>

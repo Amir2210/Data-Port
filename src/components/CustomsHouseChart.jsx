@@ -9,7 +9,7 @@ import {
 } from 'recharts'
 import numeral from 'numeral'
 
-export function CustomsHouseChart({ data }) {
+export function CustomsHouseChart({ data, year, totalYearlyImport }) {
   const importByLocation = {}
   data.forEach((row) => {
     const location = row.CustomsHouse
@@ -25,8 +25,9 @@ export function CustomsHouseChart({ data }) {
   }))
 
   return (
-    <div style={{ width: '50%', height: 500 }}>
-      <h1 className='text-xl text-stone-800 font-bold text-center'>סך כל היבוא בשקלים לפי מיקום המכס</h1>
+    <div className='' style={{ width: '100%', height: 500 }}>
+      <h3 className='text-xl text-stone-800 font-bold text-center mt-4'>סך כל היבוא בשקלים לפי מיקום המכס לשנת {year}</h3>
+      <h3 className='text-xl text-stone-800 font-bold text-center'>₪ {totalYearlyImport} </h3>
       <ResponsiveContainer>
         <BarChart
           data={chartData}
@@ -36,7 +37,7 @@ export function CustomsHouseChart({ data }) {
           <XAxis dataKey="location" angle={-45} textAnchor="end" interval={0} />
           <YAxis scale="log" domain={['auto', 'auto']} tickFormatter={(val) => numeral(val).format('0.[0]a') + '₪'} />
           <Tooltip formatter={(val) => val.toLocaleString() + ' ₪'} />
-          <Bar dataKey="total" fill="#8884d8" />
+          <Bar dataKey="total" fill="#2563eb" />
         </BarChart>
       </ResponsiveContainer>
     </div>

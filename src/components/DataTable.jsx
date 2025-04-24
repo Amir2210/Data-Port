@@ -105,10 +105,10 @@ export function DataTable() {
 
 
   return (
-    <section>
+    <section >
       <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
       <div>
-        <Box sx={{ height: 600, width: '100%', p: 2 }}>
+        <Box sx={{ height: 560, width: '100%', p: 2 }}>
           <div className='flex flex-wrap gap-2 sm:gap-10'>
 
             <FormControl sx={{ minWidth: 120, mb: 2 }}>
@@ -178,12 +178,8 @@ export function DataTable() {
             columns={columns}
             pageSize={10}
           />
-          <h2 className='text-4xl text-end text-blue-600 font-bold pt-2'>נתונים נוספים וחריגים</h2>
-          <div className='flex gap-5 text-xl text-stone-800 font-bold pt-2' dir='rtl'>
-            <p>סכום יבוא בשקלים לשנת {year}</p>
-            <p>₪ {totalYearlyImport} </p>
-          </div>
-          <CustomsHouseChart data={data} />
+          <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
+          <CustomsHouseChart data={data} totalYearlyImport={totalYearlyImport} year={year} />
         </Box>
 
       </div>

@@ -3,8 +3,8 @@ import { importData } from '../api/importData'
 import { useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { Box, Typography } from '@mui/material'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
+import { CustomsHouseChart } from './CustomsHouseChart'
 export function DataTable() {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([])
@@ -183,6 +183,7 @@ export function DataTable() {
             <p>סכום יבוא בשקלים לשנת {year}</p>
             <p>₪ {totalYearlyImport} </p>
           </div>
+          <CustomsHouseChart data={data} />
         </Box>
 
       </div>

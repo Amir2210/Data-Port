@@ -3,6 +3,7 @@ import { importData } from '../api/importData'
 import { useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { Box, Typography } from '@mui/material'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 export function DataTable() {
   const [data, setData] = useState([])
@@ -88,88 +89,103 @@ export function DataTable() {
     { field: 'VAT', headerName: 'מע״מ', width: 100 },
   ]
 
-  const yearlyImport = data.reduce((acc, row) => {
-    const year = row.Year
-    const amount = parseFloat(row.NISCurrencyAmount) || 0
-    acc[year] = (acc[year] || 0) + amount
-    return acc
-  }, {})
+  const totalYearlyImport = data.reduce((acc, row) => {
+    const amount = parseFloat(row.NISCurrencyAmount) || 0;
+    return acc + amount;
+  }, 0).toLocaleString();
 
-  console.log('yearlyImport:', yearlyImport)
+
+  // const sortedByAmount = [...data]
+  //   .filter(row => parseFloat(row.NISCurrencyAmount))
+  //   .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount));
+
+  // const top5ExpensiveImports = sortedByAmount.slice(0, 5);
+
+  // console.log('top5ExpensiveImports:', top5ExpensiveImports)
+
 
   return (
-    <div>
+    <section>
       <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
-      <Box sx={{ height: 600, width: '100%', p: 2 }}>
-        <div className='flex flex-wrap gap-2 sm:gap-10'>
+      <div>
+        <Box sx={{ height: 600, width: '100%', p: 2 }}>
+          <div className='flex flex-wrap gap-2 sm:gap-10'>
 
-          <FormControl sx={{ minWidth: 120, mb: 2 }}>
-            <InputLabel id="year-select-label">שנה</InputLabel>
-            <Select
-              labelId="year-select-label"
-              id="year-select"
-              value={year}
-              label="שנה"
-              onChange={(ev) => setYear(ev.target.value)}
-            >
-              <MenuItem value="2025">2025</MenuItem>
-              <MenuItem value="2024">2024</MenuItem>
-              <MenuItem value="2023">2023</MenuItem>
-              <MenuItem value="2022">2022</MenuItem>
-            </Select>
-          </FormControl>
+            <FormControl sx={{ minWidth: 120, mb: 2 }}>
+              <InputLabel id="year-select-label">שנה</InputLabel>
+              <Select
+                labelId="year-select-label"
+                id="year-select"
+                value={year}
+                label="שנה"
+                onChange={(ev) => setYear(ev.target.value)}
+              >
+                <MenuItem value="2025">2025</MenuItem>
+                <MenuItem value="2024">2024</MenuItem>
+                <MenuItem value="2023">2023</MenuItem>
+                <MenuItem value="2022">2022</MenuItem>
+              </Select>
+            </FormControl>
 
-          <FormControl sx={{ minWidth: 200, mb: 2 }}>
-            <InputLabel>מדינה</InputLabel>
-            <Select
-              value={selectedCountry}
-              label="מדינה"
-              onChange={handleCountryChange}
-            >
-              <MenuItem value="All">כל המדינות</MenuItem>
-              {uniqueCountries.map(country => (
-                <MenuItem key={country} value={country}>{country}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            <FormControl sx={{ minWidth: 200, mb: 2 }}>
+              <InputLabel>מדינה</InputLabel>
+              <Select
+                value={selectedCountry}
+                label="מדינה"
+                onChange={handleCountryChange}
+              >
+                <MenuItem value="All">כל המדינות</MenuItem>
+                {uniqueCountries.map(country => (
+                  <MenuItem key={country} value={country}>{country}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-          <FormControl sx={{ minWidth: 200, mb: 2 }}>
-            <InputLabel>בית מכס</InputLabel>
-            <Select
-              value={selectedCustomHouse}
-              label="בית מכס"
-              onChange={handleCustomsHouseChange}
-            >
-              <MenuItem value="All">כל בתי המכס</MenuItem>
-              {uniqueCustomsHouse.map(customHouse => (
-                <MenuItem key={customHouse} value={customHouse}>{customHouse}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            <FormControl sx={{ minWidth: 200, mb: 2 }}>
+              <InputLabel>בית מכס</InputLabel>
+              <Select
+                value={selectedCustomHouse}
+                label="בית מכס"
+                onChange={handleCustomsHouseChange}
+              >
+                <MenuItem value="All">כל בתי המכס</MenuItem>
+                {uniqueCustomsHouse.map(customHouse => (
+                  <MenuItem key={customHouse} value={customHouse}>{customHouse}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-          <FormControl sx={{ minWidth: 200, mb: 2 }}>
-            <InputLabel>קוד מטבע</InputLabel>
-            <Select
-              value={selectedCurrencyCode}
-              label="קוד מטבע"
-              onChange={handleCurrencyCodeChange}
-            >
-              <MenuItem value="All">כל המטבעות</MenuItem>
-              {uniqueCurrencyCode.map(currencyCode => (
-                <MenuItem key={currencyCode} value={currencyCode}>{currencyCode}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            <FormControl sx={{ minWidth: 200, mb: 2 }}>
+              <InputLabel>קוד מטבע</InputLabel>
+              <Select
+                value={selectedCurrencyCode}
+                label="קוד מטבע"
+                onChange={handleCurrencyCodeChange}
+              >
+                <MenuItem value="All">כל המטבעות</MenuItem>
+                {uniqueCurrencyCode.map(currencyCode => (
+                  <MenuItem key={currencyCode} value={currencyCode}>{currencyCode}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
 
-        </div>
-        {error && <Typography color="error">{error}</Typography>}
-        {!data.length && <Typography color="error">Loading...</Typography>}
-        <DataGrid
-          rows={filteredData.map((row, index) => ({ id: index, ...row }))}
-          columns={columns}
-          pageSize={10}
-        />
-      </Box>
-    </div>
+          {error && <Typography color="error">{error}</Typography>}
+          {!data.length && <Typography color="error">Loading...</Typography>}
+
+          <DataGrid
+            rows={filteredData.map((row, index) => ({ id: index, ...row }))}
+            columns={columns}
+            pageSize={10}
+          />
+          <h2 className='text-4xl text-end text-blue-600 font-bold pt-2'>נתונים נוספים וחריגים</h2>
+          <div className='flex gap-5 text-xl text-stone-800 font-bold pt-2' dir='rtl'>
+            <p>סכום יבוא בשקלים לשנת {year}</p>
+            <p>₪ {totalYearlyImport} </p>
+          </div>
+        </Box>
+
+      </div>
+    </section>
   )
 }

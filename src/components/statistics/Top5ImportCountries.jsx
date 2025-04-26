@@ -25,6 +25,7 @@ export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
   }
   return (
     <div style={{ maxWidth: 500, margin: 'auto' }}>
+      <h1 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h1>
       <h2 className='text-xl text-stone-800 font-bold text-center my-4' dir='rtl'>5 המדינות המייבאות ביותר בשנת {year}</h2>
       <Pie data={chartData} />
     </div>

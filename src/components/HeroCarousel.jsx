@@ -62,8 +62,8 @@ export function HeroCarousel({ data, columns, year, totalYearlyImport, top5Expen
       <div>
         <Top5ExpensiveImport top5ExpensiveImports={top5ExpensiveImports} year={year} columns={columns} />
       </div>
+
       <div>
-        <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
         <Top5ImportCountries top5ImportsPerCountry={top5ImportsPerCountry} year={year} />
       </div>
     </Carousel>

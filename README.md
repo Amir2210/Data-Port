@@ -1,12 +1,41 @@
-# React + Vite
+📦 Data Port - ניתוח נתוני יבוא לישראל
+ברוכים הבאים לפרויקט Data Port – אפליקציית ווב להצגת נתוני יבוא טובין לישראל בצורה ויזואלית, באמצעות טבלאות אינטראקטיביות וגרפים דינמיים.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🛠 טכנולוגיות בשימוש
+React.js – בניית הממשק
 
-Currently, two official plugins are available:
+MUI (Material-UI) – קומפוננטות עיצוב מתקדמות
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Chart.js – יצירת גרפים (עוגה ועמודות)
 
-## Expanding the ESLint configuration
+Tailwind CSS – עיצוב רקע בסיסי והתאמה אישית
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+API – קבלת נתוני יבוא ממקור ממשלתי (data.gov.il)
+
+📊 פיצ'רים עיקריים
+טבלת נתונים:
+
+סינון לפי שנה, מדינה, בית מכס, וקוד מטבע
+
+עיצוב שורות אי-זוגיות
+
+טעינה דינמית עם עיצוב מותאם
+
+גרפים:
+
+גרף עמודות המציג את סך היבוא לפי בתי מכס
+
+גרף עוגה המציג את 5 המדינות המובילות ביבוא
+
+ניתוח נתונים:
+
+חישוב סך היבוא השנתי
+
+הצגת חריגים ונתונים יוצאי דופן (לדוגמה, המדינות המובילות ביבוא)
+
+UI אחיד:
+
+רקע אחיד לכל האפליקציה
+
+כותרות ברורות עם עיצוב מקצועי
+

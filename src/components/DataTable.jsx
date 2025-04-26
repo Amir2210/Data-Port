@@ -188,6 +188,14 @@ export function DataTable() {
             rows={filteredData.map((row, index) => ({ id: index, ...row }))}
             columns={columns}
             pageSize={10}
+            sx={{
+              '& .MuiDataGrid-row:nth-of-type(odd)': {
+                backgroundColor: '#F5F5F5',
+              },
+              '& .MuiDataGrid-row:hover': {
+                backgroundColor: '#DFF2EB',
+              },
+            }}
           />
           <div className='flex justify-center'>
             <HeroCarousel data={data} columns={columns} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} />

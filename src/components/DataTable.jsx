@@ -90,19 +90,30 @@ export function DataTable() {
   ]
 
   const totalYearlyImport = data.reduce((acc, row) => {
-    const amount = parseFloat(row.NISCurrencyAmount) || 0;
-    return acc + amount;
-  }, 0).toLocaleString();
+    const amount = parseFloat(row.NISCurrencyAmount) || 0
+    return acc + amount
+  }, 0).toLocaleString()
 
 
   const sortedByAmount = [...data]
     .filter(row => parseFloat(row.NISCurrencyAmount))
-    .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount));
+    .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount))
 
-  const top5ExpensiveImports = sortedByAmount.slice(0, 5);
+  const top5ExpensiveImports = sortedByAmount.slice(0, 5)
 
-  console.log('top5ExpensiveImports:', top5ExpensiveImports)
-
+  const top5ImportsPerCountry = Object.fromEntries(
+    Object.entries(
+      data.reduce((acc, row) => {
+        const country = row.Origin_Country
+        if (country) {
+          acc[country] = (acc[country] || 0) + 1
+        }
+        return acc
+      }, {})
+    )
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+  )
 
   return (
     <section >
@@ -179,7 +190,7 @@ export function DataTable() {
             pageSize={10}
           />
           <div className='flex justify-center'>
-            <HeroCarousel data={data} columns={columns} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} />
+            <HeroCarousel data={data} columns={columns} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} />
           </div>
         </Box>
 

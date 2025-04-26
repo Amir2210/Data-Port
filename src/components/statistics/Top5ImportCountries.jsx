@@ -9,7 +9,7 @@ export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
     labels: Object.keys(top5ImportsPerCountry),
     datasets: [
       {
-        label: 'כמות יבואות',
+        label: 'כמות',
         data: Object.values(top5ImportsPerCountry),
         backgroundColor: [
           '#FF6384',

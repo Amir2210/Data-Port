@@ -1,9 +1,8 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { CustomsHouseChart } from './CustomsHouseChart';
-import { Box, Typography } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid'
-import { CountImportsPerCountry } from './countImportsPerCountry';
+import { CustomsHouseChart } from './statistics/CustomsHouseChart';
+import { Top5ImportCountries } from './statistics/Top5ImportCountries';
+import { Top5ExpensiveImport } from './statistics/Top5ExpensiveImport';
 export function HeroCarousel({ data, columns, year, totalYearlyImport, top5ExpensiveImports, top5ImportsPerCountry }) {
   return (
     <Carousel
@@ -57,24 +56,15 @@ export function HeroCarousel({ data, columns, year, totalYearlyImport, top5Expen
       swipeable
     >
       <div>
-        <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
         <CustomsHouseChart data={data} totalYearlyImport={totalYearlyImport} year={year} />
       </div>
 
       <div>
-        <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
-        <h2 className='text-xl text-stone-800 font-bold text-center mt-4' dir='rtl'>5 היבואים הכי יקרים בשנת {year}</h2>
-        <Box sx={{ height: 560, width: '100%', p: 2 }}>
-          <DataGrid
-            rows={top5ExpensiveImports.map((row, index) => ({ id: index, ...row }))}
-            columns={columns}
-            pageSize={10}
-          />
-        </Box>
+        <Top5ExpensiveImport top5ExpensiveImports={top5ExpensiveImports} year={year} columns={columns} />
       </div>
       <div>
         <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
-        <CountImportsPerCountry top5ImportsPerCountry={top5ImportsPerCountry} year={year} />
+        <Top5ImportCountries top5ImportsPerCountry={top5ImportsPerCountry} year={year} />
       </div>
     </Carousel>
   )

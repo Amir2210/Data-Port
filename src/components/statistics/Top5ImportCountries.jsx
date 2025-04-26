@@ -1,7 +1,7 @@
 import { Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 ChartJS.register(ArcElement, Tooltip, Legend)
-export function CountImportsPerCountry({ year, top5ImportsPerCountry }) {
+export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
 
 
 

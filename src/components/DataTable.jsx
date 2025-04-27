@@ -31,34 +31,40 @@ export function DataTable() {
   const uniqueCustomsHouse = Array.from(new Set(data.map((row) => row.CustomsHouse))).filter(Boolean)
   const uniqueCurrencyCode = Array.from(new Set(data.map((row) => row.CurrencyCode))).filter(Boolean)
 
+  const applyFilters = (data, selectedCountry, selectedCustomHouse, selectedCurrencyCode) => {
+    return data.filter((row) => {
+      const matchesCountry = selectedCountry === "All" || row.Origin_Country === selectedCountry
+      const matchesCustomHouse = selectedCustomHouse === "All" || row.CustomsHouse === selectedCustomHouse
+      const matchesCurrencyCode = selectedCurrencyCode === "All" || row.CurrencyCode === selectedCurrencyCode
+
+      return matchesCountry && matchesCustomHouse && matchesCurrencyCode
+    })
+  }
+
   const handleCountryChange = (event) => {
     const country = event.target.value
     setSelectedCountry(country)
-    if (country === "All") {
-      setFilteredData(data)
-    } else {
-      setFilteredData(data.filter((row) => row.Origin_Country === country))
-    }
+    setFilteredData(applyFilters(data, country, selectedCustomHouse, selectedCurrencyCode))
   }
 
   const handleCustomsHouseChange = (event) => {
     const customHouse = event.target.value
     setSelectedCustomHouse(customHouse)
-    if (customHouse === "All") {
-      setFilteredData(data)
-    } else {
-      setFilteredData(data.filter((row) => row.CustomsHouse === customHouse))
-    }
+    setFilteredData(applyFilters(data, selectedCountry, customHouse, selectedCurrencyCode))
   }
 
   const handleCurrencyCodeChange = (event) => {
     const currencyCode = event.target.value
     setSelectedCurrencyCode(currencyCode)
-    if (currencyCode === "All") {
-      setFilteredData(data)
-    } else {
-      setFilteredData(data.filter((row) => row.CurrencyCode === currencyCode))
-    }
+    setFilteredData(applyFilters(data, selectedCountry, selectedCustomHouse, currencyCode))
+  }
+
+  const handleChangeYear = (event) => {
+    const year = event.target.value
+    setYear(year)
+    setSelectedCountry("All")
+    setSelectedCustomHouse("All")
+    setSelectedCurrencyCode("All")
   }
 
 
@@ -129,7 +135,7 @@ export function DataTable() {
                 id="year-select"
                 value={year}
                 label="שנה"
-                onChange={(ev) => setYear(ev.target.value)}
+                onChange={handleChangeYear}
               >
                 <MenuItem value="2025">2025</MenuItem>
                 <MenuItem value="2024">2024</MenuItem>

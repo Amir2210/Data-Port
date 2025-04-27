@@ -50,9 +50,14 @@ export function DataTable() {
   const handleChangeYear = (event) => {
     const year = event.target.value
     setYear(year)
-    // setSelectedCountry("All")
-    // setSelectedCustomHouse("All")
-    // setSelectedCurrencyCode("All")
+  }
+
+  const onResetFilters = () => {
+    setSelectedFilters({
+      country: "All",
+      customHouse: "All",
+      currencyCode: "All",
+    })
   }
 
 
@@ -173,6 +178,7 @@ export function DataTable() {
                 ))}
               </Select>
             </FormControl>
+            <button onClick={onResetFilters}>Reset</button>
           </div>
 
           {error && <Typography color="error">{error}</Typography>}

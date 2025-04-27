@@ -1,41 +1,43 @@
-📦 Data Port - ניתוח נתוני יבוא לישראל
-ברוכים הבאים לפרויקט Data Port – אפליקציית ווב להצגת נתוני יבוא טובין לישראל בצורה ויזואלית, באמצעות טבלאות אינטראקטיביות וגרפים דינמיים.
+# 📦 Data Port
 
-🛠 טכנולוגיות בשימוש
-React.js – בניית הממשק
+**A web application for displaying and analyzing import data to Israel — with dynamic tables, charts, and insights.**
 
-MUI (Material-UI) – קומפוננטות עיצוב מתקדמות
+---
 
-Chart.js – יצירת גרפים (עוגה ועמודות)
+## 📚 Project Description
 
-Tailwind CSS – עיצוב רקע בסיסי והתאמה אישית
+Data Port is a web application that presents detailed import data to Israel.  
+It offers dynamic filtering, sorting, pagination, and interactive visualization through modern charts.
 
-API – קבלת נתוני יבוא ממקור ממשלתי (data.gov.il)
+---
 
-📊 פיצ'רים עיקריים
-טבלת נתונים:
+## 🛠️ Technologies Used
 
-סינון לפי שנה, מדינה, בית מכס, וקוד מטבע
+- **React.js** – Frontend library
+- **MUI (Material UI)** – Advanced UI components (DataGrid, Select, etc.)
+- **Chart.js** – Data visualization (bar and pie charts)
+- **Tailwind CSS** – Utility-first CSS framework
+- **Vite** – Fast development server and build tool
 
-עיצוב שורות אי-זוגיות
+---
 
-טעינה דינמית עם עיצוב מותאם
+## ✨ Main Features
 
-גרפים:
+### 📋 Dynamic Data Table
 
-גרף עמודות המציג את סך היבוא לפי בתי מכס
+- Interactive table with:
+  - **Filtering** by Year, Country, Customs House, and Currency
+  - **Sorting** on all columns
+  - **Pagination** (paging through results)
+  - **Odd Row Coloring** for better readability
 
-גרף עוגה המציג את 5 המדינות המובילות ביבוא
+### 📈 Data Visualizations
 
-ניתוח נתונים:
+- **Bar Chart** — Summarizes total imports by Customs House
+- **Pie Chart** — Displays the top 5 countries by import volume
 
-חישוב סך היבוא השנתי
+### 📊 Insights and Highlights
 
-הצגת חריגים ונתונים יוצאי דופן (לדוגמה, המדינות המובילות ביבוא)
-
-UI אחיד:
-
-רקע אחיד לכל האפליקציה
-
-כותרות ברורות עם עיצוב מקצועי
+- Total yearly import calculation
+- Detection and highlighting of significant anomalies in the data
 

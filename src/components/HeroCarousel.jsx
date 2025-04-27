@@ -3,7 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import { CustomsHouseChart } from './statistics/CustomsHouseChart';
 import { Top5ImportCountries } from './statistics/Top5ImportCountries';
 import { Top5ExpensiveImport } from './statistics/Top5ExpensiveImport';
-export function HeroCarousel({ data, columns, year, totalYearlyImport, top5ExpensiveImports, top5ImportsPerCountry }) {
+export function HeroCarousel({ data, year, totalYearlyImport, top5ExpensiveImports, top5ImportsPerCountry }) {
   return (
     <Carousel
       additionalTransfrom={0}
@@ -60,7 +60,7 @@ export function HeroCarousel({ data, columns, year, totalYearlyImport, top5Expen
       </div>
 
       <div>
-        <Top5ExpensiveImport top5ExpensiveImports={top5ExpensiveImports} year={year} columns={columns} />
+        <Top5ExpensiveImport top5ExpensiveImports={top5ExpensiveImports} year={year} />
       </div>
 
       <div>

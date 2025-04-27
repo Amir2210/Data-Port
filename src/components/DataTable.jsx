@@ -67,12 +67,7 @@ export function DataTable() {
     { field: 'Month', headerName: 'חודש', width: 110 },
     { field: 'Origin_Country', headerName: 'מדינת מקור', width: 160 },
     { field: 'CustomsItem_2_Digits', headerName: 'פריט מכס (2 ספרות)', width: 230 },
-    {
-      field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 230, valueFormatter: (params) => {
-        if (!params) return ''
-        return (+params).toLocaleString()
-      }
-    },
+    { field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 230 },
     {
       field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 160, valueFormatter: (params) => {
         if (!params) return ''
@@ -146,7 +141,7 @@ export function DataTable() {
 
   return (
     <section >
-      <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
+      <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>נתוני יבוא לישראל לשנת <span>{year}</span></h1>
       <div>
         <Box sx={{ height: 560, width: '100%', p: 2, textAlign: 'end' }}>
           <div className='flex flex-wrap items-center gap-2 sm:gap-10'>
@@ -259,7 +254,7 @@ export function DataTable() {
             }}
           />
           <div className='flex justify-center'>
-            <HeroCarousel data={data} columns={columns} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} />
+            <HeroCarousel data={data} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} />
           </div>
         </Box>
 

@@ -25,7 +25,7 @@ export function CustomsHouseChart({ data, year, totalYearlyImport }) {
   }))
 
   return (
-    <div className='' style={{ width: '100%', height: 500 }}>
+    <div className='' style={{ width: '100%', height: 600 }}>
       <h1 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h1>
       <h3 className='text-xl text-stone-800 font-bold text-center mt-4'>סך כל היבוא בשקלים לפי מיקום המכס לשנת {year}</h3>
       <h3 className='text-xl text-stone-800 font-bold text-center'>₪ {totalYearlyImport} </h3>

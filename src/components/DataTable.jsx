@@ -1,16 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { importData } from '../api/importData'
-import { useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
-import { Box, Typography } from '@mui/material'
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
+import { Box, Typography, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material'
 import { HeroCarousel } from './HeroCarousel'
 export function DataTable() {
   const [data, setData] = useState([])
-  const [filteredData, setFilteredData] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState("All")
-  const [selectedCustomHouse, setSelectedCustomHouse] = useState("All")
-  const [selectedCurrencyCode, setSelectedCurrencyCode] = useState("All")
+  const [selectedFilters, setSelectedFilters] = useState({
+    country: "All",
+    customHouse: "All",
+    currencyCode: "All",
+  })
   const [error, setError] = useState("")
   const [year, setYear] = useState(2025)
 
@@ -19,7 +18,6 @@ export function DataTable() {
       try {
         const records = await importData.fetchData(year)
         setData(records)
-        setFilteredData(records)
       } catch (err) {
         setError(err.message || "Unknown error")
       }
@@ -28,43 +26,33 @@ export function DataTable() {
   }, [year])
 
   const uniqueCountries = Array.from(new Set(data.map((row) => row.Origin_Country))).filter(Boolean)
+
   const uniqueCustomsHouse = Array.from(new Set(data.map((row) => row.CustomsHouse))).filter(Boolean)
+
   const uniqueCurrencyCode = Array.from(new Set(data.map((row) => row.CurrencyCode))).filter(Boolean)
 
-  const applyFilters = (data, selectedCountry, selectedCustomHouse, selectedCurrencyCode) => {
+  const filteredData = useMemo(() => {
     return data.filter((row) => {
-      const matchesCountry = selectedCountry === "All" || row.Origin_Country === selectedCountry
-      const matchesCustomHouse = selectedCustomHouse === "All" || row.CustomsHouse === selectedCustomHouse
-      const matchesCurrencyCode = selectedCurrencyCode === "All" || row.CurrencyCode === selectedCurrencyCode
-
+      const matchesCountry = selectedFilters.country === "All" || row.Origin_Country === selectedFilters.country
+      const matchesCustomHouse = selectedFilters.customHouse === "All" || row.CustomsHouse === selectedFilters.customHouse
+      const matchesCurrencyCode = selectedFilters.currencyCode === "All" || row.CurrencyCode === selectedFilters.currencyCode
       return matchesCountry && matchesCustomHouse && matchesCurrencyCode
     })
-  }
+  }, [data, selectedFilters])
 
-  const handleCountryChange = (event) => {
-    const country = event.target.value
-    setSelectedCountry(country)
-    setFilteredData(applyFilters(data, country, selectedCustomHouse, selectedCurrencyCode))
-  }
-
-  const handleCustomsHouseChange = (event) => {
-    const customHouse = event.target.value
-    setSelectedCustomHouse(customHouse)
-    setFilteredData(applyFilters(data, selectedCountry, customHouse, selectedCurrencyCode))
-  }
-
-  const handleCurrencyCodeChange = (event) => {
-    const currencyCode = event.target.value
-    setSelectedCurrencyCode(currencyCode)
-    setFilteredData(applyFilters(data, selectedCountry, selectedCustomHouse, currencyCode))
+  const handleFilterChange = (filterType) => (event) => {
+    setSelectedFilters(prev => ({
+      ...prev,
+      [filterType]: event.target.value,
+    }))
   }
 
   const handleChangeYear = (event) => {
     const year = event.target.value
     setYear(year)
-    setSelectedCountry("All")
-    setSelectedCustomHouse("All")
-    setSelectedCurrencyCode("All")
+    // setSelectedCountry("All")
+    // setSelectedCustomHouse("All")
+    // setSelectedCurrencyCode("All")
   }
 
 
@@ -147,9 +135,9 @@ export function DataTable() {
             <FormControl sx={{ minWidth: 200, mb: 2 }}>
               <InputLabel>מדינה</InputLabel>
               <Select
-                value={selectedCountry}
+                value={selectedFilters.country}
                 label="מדינה"
-                onChange={handleCountryChange}
+                onChange={handleFilterChange('country')}
               >
                 <MenuItem value="All">כל המדינות</MenuItem>
                 {uniqueCountries.map(country => (
@@ -161,9 +149,9 @@ export function DataTable() {
             <FormControl sx={{ minWidth: 200, mb: 2 }}>
               <InputLabel>בית מכס</InputLabel>
               <Select
-                value={selectedCustomHouse}
+                value={selectedFilters.customHouse}
                 label="בית מכס"
-                onChange={handleCustomsHouseChange}
+                onChange={handleFilterChange('customHouse')}
               >
                 <MenuItem value="All">כל בתי המכס</MenuItem>
                 {uniqueCustomsHouse.map(customHouse => (
@@ -175,9 +163,9 @@ export function DataTable() {
             <FormControl sx={{ minWidth: 200, mb: 2 }}>
               <InputLabel>קוד מטבע</InputLabel>
               <Select
-                value={selectedCurrencyCode}
+                value={selectedFilters.currencyCode}
                 label="קוד מטבע"
-                onChange={handleCurrencyCodeChange}
+                onChange={handleFilterChange('currencyCode')}
               >
                 <MenuItem value="All">כל המטבעות</MenuItem>
                 {uniqueCurrencyCode.map(currencyCode => (

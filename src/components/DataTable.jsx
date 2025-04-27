@@ -67,25 +67,55 @@ export function DataTable() {
     { field: 'Month', headerName: 'חודש', width: 110 },
     { field: 'Origin_Country', headerName: 'מדינת מקור', width: 160 },
     { field: 'CustomsItem_2_Digits', headerName: 'פריט מכס (2 ספרות)', width: 230 },
-    { field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 230 },
-    { field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 160 },
+    {
+      field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 230, valueFormatter: (params) => {
+        if (!params) return ''
+        return (+params).toLocaleString()
+      }
+    },
+    {
+      field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 160, valueFormatter: (params) => {
+        if (!params) return ''
+        return (+params).toLocaleString()
+      }
+    },
     { field: 'CustomsHouse', headerName: 'בית מכס', width: 200 },
-    { field: 'Quantity', headerName: 'כמות', width: 120 },
+    {
+      field: 'Quantity', headerName: 'כמות', width: 120, valueFormatter: (params) => {
+        if (!params) return ''
+        return (+params).toLocaleString()
+      }
+    },
     { field: 'Quantity_MeasurementUnitID', headerName: 'קוד יחידת מידה', width: 230 },
     { field: 'Quantity_MeasurementUnitName', headerName: 'שם יחידת מידה', width: 230 },
     { field: 'TradeAgreementName', headerName: 'הסכם סחר', width: 180 },
     { field: 'TermsOfSale', headerName: 'תנאי מכירה', width: 160 },
     { field: 'IsTradeAgreementWithQuota', headerName: 'האם הסכם סחר עם מכסה', width: 270 },
-    { field: 'NISCurrencyAmount', headerName: 'שווי בש"ח', width: 150 },
+    {
+      field: 'NISCurrencyAmount', headerName: 'שווי בש"ח', width: 150, valueFormatter: (params) => {
+        if (!params) return ''
+        return (+params).toLocaleString()
+      }
+    },
     { field: 'CurrencyCode', headerName: 'קוד מטבע', width: 150 },
     { field: 'AutonomyTypeID', headerName: 'קוד אוטונומיה', width: 170 },
     { field: 'AutonomyType', headerName: 'סוג אוטונומיה', width: 170 },
     { field: 'GovernmentProcedureTypeName', headerName: 'תהליך ממשלתי (עברית)', width: 250 },
     { field: 'GovernmentProcedureTypeEnglishName', headerName: 'תהליך ממשלתי (אנגלית)', width: 250 },
     { field: 'IsPreferenceDocument', headerName: 'יש מסמך העדפה', width: 190 },
-    { field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 170 },
+    {
+      field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 170, valueFormatter: (params) => {
+        if (!params) return ''
+        return (+params).toLocaleString()
+      }
+    },
     { field: 'PurchaseTax', headerName: 'מס קניה', width: 150 },
-    { field: 'VAT', headerName: 'מע״מ', width: 130 },
+    {
+      field: 'VAT', headerName: 'מע״מ', width: 130, valueFormatter: (params) => {
+        if (!params) return ''
+        return (+params).toLocaleString()
+      }
+    },
   ]
 
   const totalYearlyImport = data.reduce((acc, row) => {

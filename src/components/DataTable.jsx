@@ -119,7 +119,7 @@ export function DataTable() {
       <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
       <div>
         <Box sx={{ height: 560, width: '100%', p: 2, textAlign: 'end' }}>
-          <div className='flex flex-wrap gap-2 sm:gap-10'>
+          <div className='flex flex-wrap items-center gap-2 sm:gap-10'>
 
             <FormControl sx={{ minWidth: 120, mb: 2 }}>
               <InputLabel id="year-select-label">שנה</InputLabel>
@@ -178,7 +178,7 @@ export function DataTable() {
                 ))}
               </Select>
             </FormControl>
-            <button onClick={onResetFilters}>Reset</button>
+            <Button className='!text-lg !capitalize' onClick={onResetFilters} variant="outlined">Reset filters</Button>
           </div>
 
           {error && <Typography color="error">{error}</Typography>}

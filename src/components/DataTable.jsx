@@ -63,30 +63,30 @@ export function DataTable() {
 
 
   const columns = [
-    { field: '_id', headerName: 'ID', width: 70 },
-    { field: 'Year', headerName: 'שנה', width: 90 },
-    { field: 'Month', headerName: 'חודש', width: 90 },
-    { field: 'Origin_Country', headerName: 'מדינת מקור', width: 150 },
-    { field: 'CustomsItem_2_Digits', headerName: 'פריט מכס (2 ספרות)', width: 150 },
-    { field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 150 },
-    { field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 130 },
-    { field: 'CustomsHouse', headerName: 'בית מכס', width: 150 },
+    { field: '_id', headerName: 'ID', width: 100 },
+    { field: 'Year', headerName: 'שנה', width: 110 },
+    { field: 'Month', headerName: 'חודש', width: 110 },
+    { field: 'Origin_Country', headerName: 'מדינת מקור', width: 160 },
+    { field: 'CustomsItem_2_Digits', headerName: 'פריט מכס (2 ספרות)', width: 230 },
+    { field: 'CustomsItem_8_Digits', headerName: 'פריט מכס (8 ספרות)', width: 230 },
+    { field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 160 },
+    { field: 'CustomsHouse', headerName: 'בית מכס', width: 200 },
     { field: 'Quantity', headerName: 'כמות', width: 120 },
-    { field: 'Quantity_MeasurementUnitID', headerName: 'קוד יחידת מידה', width: 140 },
-    { field: 'Quantity_MeasurementUnitName', headerName: 'שם יחידת מידה', width: 150 },
+    { field: 'Quantity_MeasurementUnitID', headerName: 'קוד יחידת מידה', width: 230 },
+    { field: 'Quantity_MeasurementUnitName', headerName: 'שם יחידת מידה', width: 230 },
     { field: 'TradeAgreementName', headerName: 'הסכם סחר', width: 180 },
-    { field: 'TermsOfSale', headerName: 'תנאי מכירה', width: 150 },
-    { field: 'IsTradeAgreementWithQuota', headerName: 'האם הסכם סחר עם מכסה', width: 200 },
-    { field: 'NISCurrencyAmount', headerName: 'שווי בש"ח', width: 130 },
-    { field: 'CurrencyCode', headerName: 'קוד מטבע', width: 100 },
-    { field: 'AutonomyTypeID', headerName: 'קוד אוטונומיה', width: 130 },
-    { field: 'AutonomyType', headerName: 'סוג אוטונומיה', width: 150 },
-    { field: 'GovernmentProcedureTypeName', headerName: 'תהליך ממשלתי (עברית)', width: 180 },
-    { field: 'GovernmentProcedureTypeEnglishName', headerName: 'תהליך ממשלתי (אנגלית)', width: 300 },
-    { field: 'IsPreferenceDocument', headerName: 'יש מסמך העדפה', width: 160 },
-    { field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 150 },
-    { field: 'PurchaseTax', headerName: 'מס קניה', width: 120 },
-    { field: 'VAT', headerName: 'מע״מ', width: 100 },
+    { field: 'TermsOfSale', headerName: 'תנאי מכירה', width: 160 },
+    { field: 'IsTradeAgreementWithQuota', headerName: 'האם הסכם סחר עם מכסה', width: 270 },
+    { field: 'NISCurrencyAmount', headerName: 'שווי בש"ח', width: 150 },
+    { field: 'CurrencyCode', headerName: 'קוד מטבע', width: 150 },
+    { field: 'AutonomyTypeID', headerName: 'קוד אוטונומיה', width: 170 },
+    { field: 'AutonomyType', headerName: 'סוג אוטונומיה', width: 170 },
+    { field: 'GovernmentProcedureTypeName', headerName: 'תהליך ממשלתי (עברית)', width: 250 },
+    { field: 'GovernmentProcedureTypeEnglishName', headerName: 'תהליך ממשלתי (אנגלית)', width: 250 },
+    { field: 'IsPreferenceDocument', headerName: 'יש מסמך העדפה', width: 190 },
+    { field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 170 },
+    { field: 'PurchaseTax', headerName: 'מס קניה', width: 150 },
+    { field: 'VAT', headerName: 'מע״מ', width: 130 },
   ]
 
   const totalYearlyImport = data.reduce((acc, row) => {
@@ -119,7 +119,7 @@ export function DataTable() {
     <section >
       <h1 className='text-4xl text-stone-800 font-bold  text-center pt-2'>יבוא לישראל לשנת <span>{year}</span></h1>
       <div>
-        <Box sx={{ height: 560, width: '100%', p: 2 }}>
+        <Box sx={{ height: 560, width: '100%', p: 2, textAlign: 'end' }}>
           <div className='flex flex-wrap gap-2 sm:gap-10'>
 
             <FormControl sx={{ minWidth: 120, mb: 2 }}>
@@ -194,6 +194,33 @@ export function DataTable() {
               },
               '& .MuiDataGrid-row:hover': {
                 backgroundColor: '#DFF2EB',
+              },
+              '& .MuiDataGrid-cell': {
+                textAlign: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: '1rem',
+              },
+              '& .MuiDataGrid-columnHeader': {
+                fontWeight: 'bold',
+                fontSize: '1.1rem',
+                textAlign: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+              },
+              '& .MuiDataGrid-columnHeaderTitleContainer': {
+                display: 'flex',
+                justifyContent: 'center',
+              },
+              '& .MuiDataGrid-columnHeaderTitle': {
+                width: '100%',
+                textAlign: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                fontWeight: 'bold',
               },
             }}
           />

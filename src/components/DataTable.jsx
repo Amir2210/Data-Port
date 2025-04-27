@@ -122,8 +122,9 @@ export function DataTable() {
           <div className='flex flex-wrap items-center gap-2 sm:gap-10'>
 
             <FormControl sx={{ minWidth: 120, mb: 2 }}>
-              <InputLabel id="year-select-label">שנה</InputLabel>
+              <InputLabel className='!text-lg' id="year-select-label">שנה</InputLabel>
               <Select
+                className='!font-bold'
                 labelId="year-select-label"
                 id="year-select"
                 value={year}
@@ -138,8 +139,9 @@ export function DataTable() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 200, mb: 2 }}>
-              <InputLabel>מדינה</InputLabel>
+              <InputLabel className='!text-lg'>מדינה</InputLabel>
               <Select
+                className='!font-bold'
                 value={selectedFilters.country}
                 label="מדינה"
                 onChange={handleFilterChange('country')}
@@ -152,8 +154,9 @@ export function DataTable() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 200, mb: 2 }}>
-              <InputLabel>בית מכס</InputLabel>
+              <InputLabel className='!text-lg'>בית מכס</InputLabel>
               <Select
+                className='!font-bold'
                 value={selectedFilters.customHouse}
                 label="בית מכס"
                 onChange={handleFilterChange('customHouse')}
@@ -165,9 +168,10 @@ export function DataTable() {
               </Select>
             </FormControl>
 
-            <FormControl sx={{ minWidth: 200, mb: 2 }}>
-              <InputLabel>קוד מטבע</InputLabel>
+            <FormControl sx={{ minWidth: 200, mb: 2, }}>
+              <InputLabel className='!text-lg'>קוד מטבע</InputLabel>
               <Select
+                className='!font-bold'
                 value={selectedFilters.currencyCode}
                 label="קוד מטבע"
                 onChange={handleFilterChange('currencyCode')}

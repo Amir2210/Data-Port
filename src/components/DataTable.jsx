@@ -72,7 +72,7 @@ export function DataTable() {
     {
       field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 160, valueFormatter: (params) => {
         if (!params) return ''
-        return numeral(+params).format('0.[0]aa') + '₪'
+        return (numeral(+params).format('0.[0]aa') + '₪').toUpperCase()
       }
     },
     { field: 'CustomsHouse', headerName: 'בית מכס', width: 200 },
@@ -90,7 +90,7 @@ export function DataTable() {
     {
       field: 'NISCurrencyAmount', headerName: 'שווי בש"ח', width: 150, valueFormatter: (params) => {
         if (!params) return ''
-        return numeral(+params).format('0.[0]aa') + '₪'
+        return (numeral(+params).format('0.[0]aa') + '₪').toUpperCase()
       }
     },
     { field: 'CurrencyCode', headerName: 'קוד מטבע', width: 150 },
@@ -102,14 +102,19 @@ export function DataTable() {
     {
       field: 'GeneralCustomsTax', headerName: 'מס מכס כללי', width: 170, valueFormatter: (params) => {
         if (!params) return ''
-        return (+params).toLocaleString()
+        return (numeral(+params).format('0.[0]aa') + '₪').toUpperCase()
       }
     },
-    { field: 'PurchaseTax', headerName: 'מס קניה', width: 150 },
+    {
+      field: 'PurchaseTax', headerName: 'מס קניה', width: 150, valueFormatter: (params) => {
+        if (!params) return ''
+        return (numeral(+params).format('0.[0]aa') + '₪').toUpperCase()
+      }
+    },
     {
       field: 'VAT', headerName: 'מע״מ', width: 130, valueFormatter: (params) => {
         if (!params) return ''
-        return (+params).toLocaleString()
+        return (numeral(+params).format('0.[0]aa') + '').toUpperCase()
       }
     },
   ]

@@ -23,9 +23,9 @@ export function CustomsHouseChart({ data, year }) {
     }
   })
 
-  const chartData = Object.entries(importByLocation).map(([location, total]) => ({
+  const chartData = Object.entries(importByLocation).map(([location, Total]) => ({
     location,
-    total: Number(total.toFixed(2)),
+    Total: Number(Total.toFixed(2)),
   }))
 
   return (
@@ -40,9 +40,9 @@ export function CustomsHouseChart({ data, year }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="location" angle={0} textAnchor="middle" interval={0} />
-          <YAxis scale="log" domain={['auto', 'auto']} tickFormatter={(val) => numeral(val).format('0.[0]a') + '₪'} allowDataOverflow={true} minTickGap={50} />
-          <Tooltip formatter={(val) => numeral(val).format('0.[0]a') + '₪'} />
-          <Bar dataKey="total" fill="#2563eb" />
+          <YAxis scale="log" domain={['auto', 'auto']} tickFormatter={(val) => (numeral(val).format('0.[0a') + '₪').toUpperCase()} allowDataOverflow={true} minTickGap={50} />
+          <Tooltip formatter={(val) => (numeral(val).format('0.[0a') + '₪').toUpperCase()} />
+          <Bar dataKey='Total' fill="#2563eb" />
         </BarChart>
       </ResponsiveContainer>
     </div>

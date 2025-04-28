@@ -37,7 +37,7 @@ export function Top5ExpensiveImport({ year, data }) {
       <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
       <div className='my-3 min-w-96'>
         <FormControl fullWidth>
-          <InputLabel className='!text-lg'>פריטים</InputLabel>
+          <InputLabel className='!text-lg'>הצג</InputLabel>
           <Select
             className='!font-bold'
             label="count"

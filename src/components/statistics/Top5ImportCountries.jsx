@@ -1,9 +1,24 @@
 import { Pie } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-
+import { FormControl, InputLabel, MenuItem, Select, } from '@mui/material'
+import { useState } from 'react'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
+export function Top5ImportCountries({ year, data }) {
+  const [count, setCount] = useState(5)
+  const top5ImportsPerCountry = Object.fromEntries(
+    Object.entries(
+      data.reduce((acc, row) => {
+        const country = row.Origin_Country
+        if (country) {
+          acc[country] = (acc[country] || 0) + 1
+        }
+        return acc
+      }, {})
+    )
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, count)
+  )
   const total = Object.values(top5ImportsPerCountry).reduce((acc, val) => acc + val, 0)
 
   const chartData = {
@@ -13,11 +28,21 @@ export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
         label: 'כמות יבוא',
         data: Object.values(top5ImportsPerCountry),
         backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#16C47F',
-          '#9966FF',
+          '#577BC1',
+          '#FFD65A',
+          '#B771E5',
+          '#FF2DF1',
+          '#AEEA94',
+          '#FF5733',
+          '#33FF57',
+          '#3357FF',
+          '#F1C40F',
+          '#8E44AD',
+          '#1ABC9C',
+          '#E74C3C',
+          '#2ECC71',
+          '#9B59B6',
+          '#16A085',
         ],
         borderColor: '#fff',
         borderWidth: 2,
@@ -43,8 +68,23 @@ export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
   return (
     <div style={{ maxWidth: 500, margin: 'auto' }}>
       <h1 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h1>
+      <div className='my-3'>
+        <FormControl fullWidth>
+          <InputLabel className='!text-lg'>הצג</InputLabel>
+          <Select
+            className='!font-bold'
+            label="count"
+            onChange={(ev) => setCount(ev.target.value)}
+            value={count}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       <h2 className='text-xl text-stone-800 font-bold text-center my-4' dir='rtl'>
-        5 המדינות עם כמויות היבוא הגבוהות ביותר {year}
+        {count} המדינות עם כמויות היבוא הגבוהות ביותר {year}
       </h2>
       <Pie data={chartData} options={options} />
     </div>

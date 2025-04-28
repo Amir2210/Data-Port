@@ -9,8 +9,12 @@ import {
 } from 'recharts'
 import numeral from 'numeral'
 
-export function CustomsHouseChart({ data, year, totalYearlyImport }) {
+export function CustomsHouseChart({ data, year }) {
   const importByLocation = {}
+  const totalYearlyImport = data.reduce((acc, row) => {
+    const amount = parseFloat(row.NISCurrencyAmount) || 0
+    return acc + amount
+  }, 0).toLocaleString()
   data.forEach((row) => {
     const location = row.CustomsHouse
     const amount = parseFloat(row.NISCurrencyAmount) || 0

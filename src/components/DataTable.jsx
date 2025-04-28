@@ -90,7 +90,7 @@ export function DataTable() {
     {
       field: 'NISCurrencyAmount', headerName: 'שווי בש"ח', width: 150, valueFormatter: (params) => {
         if (!params) return ''
-        return (+params).toLocaleString()
+        return numeral(+params).format('0.[0]aa') + '₪'
       }
     },
     { field: 'CurrencyCode', headerName: 'קוד מטבע', width: 150 },

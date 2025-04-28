@@ -4,7 +4,7 @@ import { CustomsHouseChart } from './statistics/CustomsHouseChart';
 import { Top5ImportCountries } from './statistics/Top5ImportCountries';
 import { Top5ExpensiveImport } from './statistics/Top5ExpensiveImport';
 import { Top5ImportItems } from './statistics/Top5ImportItems';
-export function HeroCarousel({ data, year, totalYearlyImport, top5ExpensiveImports, top5ImportsPerCountry, top5ImportsItems }) {
+export function HeroCarousel({ data, year, totalYearlyImport, top5ExpensiveImports, top5ImportsPerCountry }) {
   return (
     <Carousel
       additionalTransfrom={0}
@@ -61,7 +61,7 @@ export function HeroCarousel({ data, year, totalYearlyImport, top5ExpensiveImpor
       </div>
 
       <div>
-        <Top5ImportItems top5ImportsItems={top5ImportsItems} year={year} />
+        <Top5ImportItems data={data} year={year} />
       </div>
 
       <div>
@@ -72,9 +72,7 @@ export function HeroCarousel({ data, year, totalYearlyImport, top5ExpensiveImpor
         <Top5ImportCountries top5ImportsPerCountry={top5ImportsPerCountry} year={year} />
       </div>
 
-      <div>
-        <Top5ImportItems top5ImportsItems={top5ImportsItems} year={year} />
-      </div>
+
     </Carousel>
   )
 }

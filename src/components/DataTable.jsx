@@ -139,19 +139,7 @@ export function DataTable() {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
   )
-  const top5ImportsItems = Object.fromEntries(
-    Object.entries(
-      data.reduce((acc, row) => {
-        const item = row.CustomsItem_8_Digits
-        if (item) {
-          acc[item] = (acc[item] || 0) + 1
-        }
-        return acc
-      }, {})
-    )
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-  )
+
 
   return (
     <section >
@@ -268,7 +256,7 @@ export function DataTable() {
             }}
           />
           <div className='flex justify-center'>
-            <HeroCarousel data={data} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} top5ImportsItems={top5ImportsItems} />
+            <HeroCarousel data={data} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} />
           </div>
         </Box>
 

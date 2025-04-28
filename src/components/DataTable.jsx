@@ -120,12 +120,6 @@ export function DataTable() {
   }, 0).toLocaleString()
 
 
-  const sortedByAmount = [...data]
-    .filter(row => parseFloat(row.NISCurrencyAmount))
-    .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount))
-
-  const top5ExpensiveImports = sortedByAmount.slice(0, 5)
-
   const top5ImportsPerCountry = Object.fromEntries(
     Object.entries(
       data.reduce((acc, row) => {
@@ -256,7 +250,7 @@ export function DataTable() {
             }}
           />
           <div className='flex justify-center'>
-            <HeroCarousel data={data} totalYearlyImport={totalYearlyImport} year={year} top5ExpensiveImports={top5ExpensiveImports} top5ImportsPerCountry={top5ImportsPerCountry} />
+            <HeroCarousel data={data} totalYearlyImport={totalYearlyImport} year={year} top5ImportsPerCountry={top5ImportsPerCountry} />
           </div>
         </Box>
 

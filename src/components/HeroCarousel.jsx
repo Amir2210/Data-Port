@@ -65,7 +65,7 @@ export function HeroCarousel({ data, year, totalYearlyImport, top5ExpensiveImpor
       </div>
 
       <div>
-        <Top5ExpensiveImport top5ExpensiveImports={top5ExpensiveImports} year={year} />
+        <Top5ExpensiveImport year={year} data={data} />
       </div>
 
       <div>

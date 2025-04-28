@@ -1,7 +1,16 @@
 import { Box } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import numeral from 'numeral'
-export function Top5ExpensiveImport({ top5ExpensiveImports, year }) {
+import { useState } from 'react'
+import { FormControl, InputLabel, MenuItem, Select, } from '@mui/material'
+export function Top5ExpensiveImport({ year, data }) {
+  const [count, setCount] = useState(5)
+
+  const sortedByAmount = [...data]
+    .filter(row => parseFloat(row.NISCurrencyAmount))
+    .sort((a, b) => parseFloat(b.NISCurrencyAmount) - parseFloat(a.NISCurrencyAmount))
+
+  const top5ExpensiveImports = sortedByAmount.slice(0, count)
 
   const columns = [
     { field: '_id', headerName: 'ID', width: 100 },
@@ -22,10 +31,26 @@ export function Top5ExpensiveImport({ top5ExpensiveImports, year }) {
     },
     { field: 'CurrencyCode', headerName: 'קוד מטבע', width: 150 },
   ]
+
   return (
     <div className='flex flex-col items-center'>
       <h2 className='text-4xl text-center text-blue-600 font-bold py-2 underline'>נתונים נוספים וחריגים</h2>
-      <h2 className='text-xl text-stone-800 font-bold text-center mt-4' dir='rtl'>5 היבואנים עם השווי היקר ביותר בשנת {year}</h2>
+      <div className='my-3 min-w-96'>
+        <FormControl fullWidth>
+          <InputLabel className='!text-lg'>פריטים</InputLabel>
+          <Select
+            className='!font-bold'
+            label="count"
+            onChange={(ev) => setCount(ev.target.value)}
+            value={count}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <h2 className='text-xl text-stone-800 font-bold text-center mt-4' dir='rtl'>{count} היבואנים עם השווי היקר ביותר בשנת {year}</h2>
       <Box sx={{ height: 560, width: '60%', p: 2 }}>
         <DataGrid
 

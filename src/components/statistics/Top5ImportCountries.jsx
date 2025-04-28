@@ -16,7 +16,7 @@ export function Top5ImportCountries({ year, top5ImportsPerCountry }) {
           '#FF6384',
           '#36A2EB',
           '#FFCE56',
-          '#4BC0C0',
+          '#16C47F',
           '#9966FF',
         ],
         borderColor: '#fff',

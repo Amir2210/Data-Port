@@ -3,6 +3,7 @@ import { importData } from '../api/importData'
 import { DataGrid } from '@mui/x-data-grid'
 import { Box, Typography, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material'
 import { HeroCarousel } from './HeroCarousel'
+import numeral from 'numeral'
 export function DataTable() {
   const [data, setData] = useState([])
   const [selectedFilters, setSelectedFilters] = useState({
@@ -71,7 +72,7 @@ export function DataTable() {
     {
       field: 'Exempt_CustomsItem', headerName: 'פטור ממכס', width: 160, valueFormatter: (params) => {
         if (!params) return ''
-        return (+params).toLocaleString()
+        return numeral(+params).format('0.[0]aa') + '₪'
       }
     },
     { field: 'CustomsHouse', headerName: 'בית מכס', width: 200 },

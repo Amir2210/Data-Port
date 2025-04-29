@@ -69,9 +69,9 @@ export function HeroCarousel({ data, year }) {
         <Top5ExpensiveImport year={year} data={data} />
       </div>
 
-      <div>
+      {/* <div>
         <ImportPerMonth year={year} data={data} />
-      </div>
+      </div> */}
 
       <div>
         <Top5ImportCountries year={year} data={data} />
